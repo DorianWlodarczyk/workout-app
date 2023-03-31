@@ -75,6 +75,11 @@ def postsignUp(request):
         # creating a user with the given email and password
         user=authe.create_user_with_email_and_password(email,password)
         uid = user['localId']
+        data = {
+            'name': name,
+            'email': email,
+        }
+        database.child("users").child(uid).set(data)
         idtoken = request.session['uid']
         response = {'success': True}
      except:
